@@ -55,7 +55,7 @@ Attrition, or employee turnover, is a critical challenge for organizations. This
    ```
 4. Run the Streamlit App:
    ```bash
-   streamlit run app.py
+   streamlit run 1_🏠_Homepage.py
    ```
 
 ## Access the Application
