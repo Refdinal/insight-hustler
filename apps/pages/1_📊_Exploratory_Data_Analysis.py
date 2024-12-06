@@ -30,7 +30,7 @@ section = st.sidebar.radio(
 @st.cache_data
 def load_data():
     df = pd.read_csv(
-        "https://raw.githubusercontent.com/Refdinal/insight-hustler/refs/heads/master/data/aug_train.csv"
+        "https://raw.githubusercontent.com/Refdinal/insight-hustler/refs/heads/master/data/raw/aug_train.csv"
     )
     return df
 
