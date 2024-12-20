@@ -28,18 +28,22 @@ How can we identify the factors influencing an employee's decision to leave thei
 
 ### **Team Members**
 - **Mentor**: Salsabila Nur Yasmin  
-- **Data Scientist**: Annisa Fatihaturrahma  
-- **Data Engineer**: Hasna Shalihah Ash Shiddiqiyah  
-- **Data Analyst**: Refdinal F  
+- **Data Enginner & Data Scientist** : Annisa Fatihaturrahma  
+- **Project Manager & Data Analyst** : Refdinal F  
 
 ---
 
 ### **Objectives**
-- Create a robust predictive model using features like education, work experience, etcs.
+- Create a robust predictive model using features like education, work experience, etc.
 - Provide insights into employee attrition trends and actionable recommendations for HR.
 
 ---
 
-Navigate through the sidebar to explore the data, preprocessing steps, modeling, and prediction results. 🚀
+Navigate through the sidebar to explore the data, preprocessing steps, modeling, and prediction results. 🚀  
+
+---
+
+### **Contribute**
+Fork our repository on [GitHub](https://github.com/Refdinal/insight-hustler) and contribute to our project!
 """
 )
