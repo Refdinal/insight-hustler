@@ -375,7 +375,7 @@ if section == "Model Prediction":
         df_pred = df_pred.reindex(columns=df2.columns, fill_value=0)
         df_pred = df_pred.drop(columns=["target"])
         st.dataframe(df_pred)
-        model = load("models/xgboost_model.joblib")
+        model = load("/mount/src/insight-hustler/apps/models/xgboost_model.joblib")
 
         # Predict probabilities
         pred_result = model.predict_proba(df_pred)
