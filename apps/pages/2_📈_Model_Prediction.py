@@ -122,7 +122,11 @@ if section == "Model Performance":
     st.write(
         "We have tried several classification models with the following evaluation metrics."
     )
-    logreg = load("./models/logistic_regression_model.joblib")
+    logreg = load(
+        "/mount/src/insight-hustler/apps/models/logistic_regression_model.joblib"
+    )
+
+    # logreg = load("./models/logistic_regression_model.joblib")
     knn = load("./models/k_nearest_neighbors_model.joblib")
     dtree = load("./models/decision_tree_model.joblib")
     rf = load("./models/random_forest_model.joblib")
