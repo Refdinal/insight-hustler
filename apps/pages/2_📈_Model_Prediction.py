@@ -125,12 +125,21 @@ if section == "Model Performance":
     logreg = load(
         "/mount/src/insight-hustler/apps/models/logistic_regression_model.joblib"
     )
+    knn = load(
+        "/mount/src/insight-hustler/apps/models/k_nearest_neighbors_model.joblib"
+    )
+
+    dtree = load("/mount/src/insight-hustler/apps/models/decision_tree_model.joblib")
+
+    rf = load("/mount/src/insight-hustler/apps/models/random_forest_model.joblib")
+
+    xgb = load("/mount/src/insight-hustler/apps/models/xgboost_model.joblib")
 
     # logreg = load("./models/logistic_regression_model.joblib")
-    knn = load("./models/k_nearest_neighbors_model.joblib")
-    dtree = load("./models/decision_tree_model.joblib")
-    rf = load("./models/random_forest_model.joblib")
-    xgb = load("./models/xgboost_model.joblib")
+    # knn = load("./models/k_nearest_neighbors_model.joblib")
+    # dtree = load("./models/decision_tree_model.joblib")
+    # rf = load("./models/random_forest_model.joblib")
+    # xgb = load("./models/xgboost_model.joblib")
     logreg_result = evaluate_metrics(
         logreg, X_train_scaled, y_train_resampled, X_test_scaled, y_test
     )
