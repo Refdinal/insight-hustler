@@ -21,7 +21,7 @@ st.set_page_config(
     page_icon="📈",
 )
 
-st.title("Prediction Results")
+st.title("Model Evaluation and Prediction")
 st.markdown(
     """
 📈 **Model Performance and Model Prediction**
@@ -32,7 +32,7 @@ st.markdown(
 st.sidebar.title("Model Evaluation Sections")
 section = st.sidebar.radio(
     "Choose a section:",
-    ["Model Performance", "Model Prediction", "Predict New Data"],
+    ["Model Performance", "Model Prediction"],
 )
 
 
