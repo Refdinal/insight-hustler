@@ -122,11 +122,11 @@ if section == "Model Performance":
     st.write(
         "We have tried several classification models with the following evaluation metrics."
     )
-    logreg = load("models/logistic_regression_model.joblib")
-    knn = load("models/k_nearest_neighbors_model.joblib")
-    dtree = load("models/decision_tree_model.joblib")
-    rf = load("models/random_forest_model.joblib")
-    xgb = load("models/xgboost_model.joblib")
+    logreg = load("./models/logistic_regression_model.joblib")
+    knn = load("./models/k_nearest_neighbors_model.joblib")
+    dtree = load("./models/decision_tree_model.joblib")
+    rf = load("./models/random_forest_model.joblib")
+    xgb = load("./models/xgboost_model.joblib")
     logreg_result = evaluate_metrics(
         logreg, X_train_scaled, y_train_resampled, X_test_scaled, y_test
     )
