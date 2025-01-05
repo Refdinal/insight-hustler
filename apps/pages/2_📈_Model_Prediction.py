@@ -118,10 +118,22 @@ X_train, X_test, y_train, y_test = train_test_split(
 smote = SMOTE(random_state=42)
 X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 
+num_cols = X.select_dtypes(include=["int64", "float64"]).columns.to_list()
+non_num_cols = X.select_dtypes(exclude=["int64", "float64"]).columns.to_list()
 scaler = StandardScaler()
-scaler.fit(X_train_resampled)
-X_train_scaled = scaler.transform(X_train_resampled)  # Fit dan transform data latih
-X_test_scaled = scaler.transform(X_test)  # Hanya transform data uji
+scaler.fit(X_train_resampled[num_cols])
+X_train_scaled = pd.DataFrame(
+    scaler.transform(X_train_resampled[num_cols])
+)  # Fit dan transform data latih
+X_test_scaled = pd.DataFrame(
+    scaler.transform(X_test[num_cols])
+)  # Hanya transform data uji
+X_train_scaled = pd.concat(
+    [X_train_scaled, X_train_resampled[non_num_cols]], axis=1
+).to_numpy()
+X_test_scaled = pd.concat(
+    [X_test_scaled, X_test[non_num_cols].reset_index(drop=True)], axis=1
+).to_numpy()
 
 
 # Section: Model Performance
