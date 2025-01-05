@@ -358,11 +358,11 @@ if section == "Model Prediction":
         df_pred = pd.get_dummies(df_pred, columns=["company_type"], drop_first=False)
         df_pred = df_pred.reindex(columns=df2.columns, fill_value=0)
         df_pred = df_pred.drop(columns=["target"])
-        st.dataframe(df_pred)
+
         model = load("/mount/src/insight-hustler/apps/models/xgboost.joblib")
         # model = load("./models/xgboost.joblib")
         # Predict probabilities
-        pred_result = model.predict(df_pred)
+        pred_result = model.predict_proba(df_pred)
 
         # Extract probability for the positive class (e.g., column index 1 for binary classification)
         positive_class_prob = pred_result[0][1]
