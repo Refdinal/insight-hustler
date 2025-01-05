@@ -135,25 +135,25 @@ if section == "Model Performance":
     st.dataframe(df3, use_container_width=True)
     st.markdown(
         """
-    # Insights
+            # Insights
 
-## 1. Best Performance
-- **CatBoost** achieves the highest test accuracy (0.785893) with good stability, making it the most superior model.
-- **LGBM Classifier** ranks second with a comparable test accuracy (0.784227).
+            ## 1. Best Performance
+            - **CatBoost** achieves the highest test accuracy (0.785893) with good stability, making it the most superior model.
+            - **LGBM Classifier** ranks second with a comparable test accuracy (0.784227).
 
-## 2. Overfitting
-- **Random Forest** exhibits potential overfitting with a high train accuracy (0.837521) but lower test accuracy (0.765621).
-- **KNN** and **Decision Tree** show significant overfitting with a large gap between train and test accuracy.
+            ## 2. Overfitting
+            - **Random Forest** exhibits potential overfitting with a high train accuracy (0.837521) but lower test accuracy (0.765621).
+            - **KNN** and **Decision Tree** show significant overfitting with a large gap between train and test accuracy.
 
-## 3. Consistency
-- **Logistic Regression** is highly stable between train (0.796162), cross-validation, and test accuracy (0.771730), though its test accuracy is lower compared to more complex models.
+            ## 3. Consistency
+            - **Logistic Regression** is highly stable between train (0.796162), cross-validation, and test accuracy (0.771730), though its test accuracy is lower compared to more complex models.
 
-## 4. Recommendations
-- Use **CatBoost** for the best performance.
-- Consider **LGBM Classifier** as a balanced alternative.
-- Opt for **Logistic Regression** if simplicity and consistency are prioritized.
+            ## 4. Recommendations
+            - Use **CatBoost** for the best performance.
+            - Consider **LGBM Classifier** as a balanced alternative.
+            - Opt for **Logistic Regression** if simplicity and consistency are prioritized.
 
-"""
+            """
     )
 # Section: Model Prediction
 if section == "Model Prediction":
