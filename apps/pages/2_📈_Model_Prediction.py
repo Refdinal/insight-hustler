@@ -7,6 +7,8 @@ from scipy.stats import zscore
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import SMOTE
+from catboost import CatBoostClassifier
+from lightgbm import LGBMClassifier
 from joblib import load
 from sklearn.metrics import (
     accuracy_score,
@@ -50,6 +52,13 @@ def load_data2():
         "https://raw.githubusercontent.com/Refdinal/insight-hustler/refs/heads/master/data/processed/data_preprocessed.csv"
     )
     return df2
+
+
+def load_data3():
+    df3 = pd.read_csv(
+        "https://raw.githubusercontent.com/Refdinal/insight-hustler/refs/heads/master/data/processed/model_result.csv"
+    )
+    return df3
 
 
 def evaluate_metrics(model, X_train, y_train, X_test, y_test):
@@ -99,6 +108,7 @@ def evaluate_metrics(model, X_train, y_train, X_test, y_test):
 
 df = load_data()
 df2 = load_data2()
+df3 = load_data3()
 X = df2.drop(columns=["target"])
 y = df2["target"]
 X_train, X_test, y_train, y_test = train_test_split(
@@ -120,57 +130,31 @@ if section == "Model Performance":
     # Descriptive statistics
     st.header("Model Performance")
     st.write(
-        "We have tried several classification models with the following evaluation metrics."
+        "We have tried several classification tuned models with the following evaluation metrics."
     )
-    logreg = load(
-        "/mount/src/insight-hustler/apps/models/logistic_regression_model.joblib"
+    st.dataframe(df3, use_container_width=True)
+    st.markdown(
+        """
+    # Insights
+
+## 1. Best Performance
+- **CatBoost** achieves the highest test accuracy (0.785893) with good stability, making it the most superior model.
+- **LGBM Classifier** ranks second with a comparable test accuracy (0.784227).
+
+## 2. Overfitting
+- **Random Forest** exhibits potential overfitting with a high train accuracy (0.837521) but lower test accuracy (0.765621).
+- **KNN** and **Decision Tree** show significant overfitting with a large gap between train and test accuracy.
+
+## 3. Consistency
+- **Logistic Regression** is highly stable between train (0.796162), cross-validation, and test accuracy (0.771730), though its test accuracy is lower compared to more complex models.
+
+## 4. Recommendations
+- Use **CatBoost** for the best performance.
+- Consider **LGBM Classifier** as a balanced alternative.
+- Opt for **Logistic Regression** if simplicity and consistency are prioritized.
+
+"""
     )
-    knn = load(
-        "/mount/src/insight-hustler/apps/models/k_nearest_neighbors_model.joblib"
-    )
-
-    dtree = load("/mount/src/insight-hustler/apps/models/decision_tree_model.joblib")
-
-    rf = load("/mount/src/insight-hustler/apps/models/random_forest_model.joblib")
-
-    xgb = load("/mount/src/insight-hustler/apps/models/xgboost_model.joblib")
-
-    # logreg = load("./models/logistic_regression_model.joblib")
-    # knn = load("./models/k_nearest_neighbors_model.joblib")
-    # dtree = load("./models/decision_tree_model.joblib")
-    # rf = load("./models/random_forest_model.joblib")
-    # xgb = load("./models/xgboost_model.joblib")
-    logreg_result = evaluate_metrics(
-        logreg, X_train_scaled, y_train_resampled, X_test_scaled, y_test
-    )
-    knn_result = evaluate_metrics(
-        knn, X_train_scaled, y_train_resampled, X_test_scaled, y_test
-    )
-    dtree_result = evaluate_metrics(
-        dtree, X_train_scaled, y_train_resampled, X_test_scaled, y_test
-    )
-    rf_result = evaluate_metrics(
-        rf, X_train_scaled, y_train_resampled, X_test_scaled, y_test
-    )
-    xgb_result = evaluate_metrics(
-        xgb, X_train_scaled, y_train_resampled, X_test_scaled, y_test
-    )
-
-    def highlight_max(s):
-        is_max = s == s.max()  # Check where values are the max in the row
-        return ["background-color: yellow" if v else "" for v in is_max]
-
-    # Apply the highlight function
-
-    comparison_df_test = pd.DataFrame()
-    comparison_df_test["Logistic Regression"] = logreg_result["Test"]
-    comparison_df_test["K-Nearest Neighbors"] = knn_result["Test"]
-    comparison_df_test["Decision Tree"] = dtree_result["Test"]
-    comparison_df_test["Random Forest Classifier"] = rf_result["Test"]
-    comparison_df_test["XGBoost"] = xgb_result["Test"]
-    comparison_df_test = comparison_df_test.style.apply(highlight_max, axis=1)
-    st.dataframe(comparison_df_test, use_container_width=True)
-
 # Section: Model Prediction
 if section == "Model Prediction":
 
@@ -375,10 +359,10 @@ if section == "Model Prediction":
         df_pred = df_pred.reindex(columns=df2.columns, fill_value=0)
         df_pred = df_pred.drop(columns=["target"])
         st.dataframe(df_pred)
-        model = load("/mount/src/insight-hustler/apps/models/xgboost_model.joblib")
-
+        # model = load("/mount/src/insight-hustler/apps/models/xgboost_model.joblib")
+        model = load("./models/logreg.joblib")
         # Predict probabilities
-        pred_result = model.predict_proba(df_pred)
+        pred_result = model.predict(df_pred)
 
         # Extract probability for the positive class (e.g., column index 1 for binary classification)
         positive_class_prob = pred_result[0][1]
